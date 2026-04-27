@@ -1,5 +1,5 @@
 from openai import OpenAI
-import time
+import os
 
 client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 print("API KEY:", os.getenv("OPENAI_API_KEY"))
