@@ -1,8 +1,8 @@
 from openai import OpenAI
 import time
 
-client = OpenAI()
-
+client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+print("API KEY:", os.getenv("OPENAI_API_KEY"))
 def generate():
     prompt = "Придумай 5 вирусных идей видео для товара: держатель для телефона в авто"
 
