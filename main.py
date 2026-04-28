@@ -1,25 +1,42 @@
-from openai import OpenAI
-import os
+import random
+import time
 
-client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
-print("API KEY:", os.getenv("OPENAI_API_KEY"))
-def generate():
-    prompt = "Придумай 5 вирусных идей видео для товара: держатель для телефона в авто"
+products = [
+    "мини пылесос для клавиатуры",
+    "умная розетка",
+    "держатель телефона в авто",
+    "LED подсветка для комнаты",
+    "портативный блендер"
+]
 
-    response = client.chat.completions.create(
-        model="gpt-5",
-        messages=[{"role": "user", "content": prompt}]
-    )
+hooks = [
+    "Ты не поверишь, что это делает...",
+    "ТОП находка с маркетплейса",
+    "Вещь, которая изменила мою жизнь",
+    "Почему я не знал об этом раньше?"
+]
 
-    return response.choices[0].message.content
+def generate_idea():
+    product = random.choice(products)
+    hook = random.choice(hooks)
+
+    script = f"""
+Хук: {hook}
+Продукт: {product}
+Сюжет: показывает проблему → решение через товар
+CTA: ссылка в описании
+"""
+
+    return script
 
 
 while True:
-    ideas = generate()
-    print("=== ИДЕИ ===")
-    print(ideas)
+    idea = generate_idea()
+
+    print("=== НОВАЯ ИДЕЯ ===")
+    print(idea)
 
     with open("ideas.txt", "a") as f:
-        f.write(ideas + "\n\n")
+        f.write(idea + "\n\n")
 
-    time.sleep(3600)
+    time.sleep(60)
