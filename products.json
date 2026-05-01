@@ -1,0 +1,23 @@
+[
+  {
+    "name": "Мини пылесос для клавиатуры",
+    "price": "1200 руб",
+    "link": "https://example.com/product1",
+    "pain": "грязная клавиатура",
+    "score": 7
+  },
+  {
+    "name": "Умная розетка",
+    "price": "1500 руб",
+    "link": "https://example.com/product2",
+    "pain": "забываешь выключать приборы",
+    "score": 9
+  },
+  {
+    "name": "Держатель телефона в авто",
+    "price": "800 руб",
+    "link": "https://example.com/product3",
+    "pain": "неудобно смотреть навигатор",
+    "score": 8
+  }
+]
