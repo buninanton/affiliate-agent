@@ -1,13 +1,9 @@
 import random
 import time
+import json
 
-products = [
-    {"name": "мини пылесос для клавиатуры", "pain": "грязная клавиатура"},
-    {"name": "умная розетка", "pain": "забываешь выключать приборы"},
-    {"name": "держатель телефона в авто", "pain": "неудобно смотреть навигатор"},
-    {"name": "LED подсветка", "pain": "скучный интерьер"},
-    {"name": "портативный блендер", "pain": "нет времени готовить"}
-]
+with open("products.json", "r", encoding="utf-8") as f:
+    products = json.load(f)
 
 hooks = [
     "Ты делаешь это неправильно...",
@@ -16,8 +12,13 @@ hooks = [
     "Эта вещь решает проблему за 10 секунд"
 ]
 
+def pick_best_product(products):
+    sorted_products = sorted(products, key=lambda x: x["score"], reverse=True)
+    top = sorted_products[:2]  # берём топ 2
+    return random.choice(top)
+
 def generate_idea():
-    product = random.choice(products)
+    product = pick_best_product(products)
     hook = random.choice(hooks)
 
     script = f"""
@@ -25,16 +26,20 @@ def generate_idea():
 
 Хук: {hook}
 
+🔥 ТОВАР С ПОТЕНЦИАЛОМ:
+{product['name']}
+
+Цена: {product['price']}
+
 Проблема: {product['pain']}
 
-Решение: используем {product['name']}
+Сюжет:
+1. показать боль
+2. усилить проблему
+3. решение через товар
+4. вау-эффект
 
-Сцены:
-1. показать проблему
-2. показать товар
-3. эффект "вау"
-
-CTA: ссылка в профиле
+Ссылка: {product['link']}
 """
 
     return script
@@ -43,10 +48,7 @@ CTA: ссылка в профиле
 while True:
     idea = generate_idea()
 
-    print("=== ВИРУСНАЯ ИДЕЯ ===")
+    print("=== ЛУЧШИЙ ТОВАР ===")
     print(idea)
-
-    with open("ideas.txt", "a") as f:
-        f.write(idea + "\n\n")
 
     time.sleep(60)
